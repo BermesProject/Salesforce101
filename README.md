@@ -5,7 +5,6 @@ Claude Code와 함께 Salesforce Developer Edition에 DAY 1 실습환경 셋업�
 ## 시작하기
 
 1. 저장소를 clone합니다. (git clone https://github.com/BermesProject/Salesforce101.git)
-claude
 2. `Day1/` 디렉터리에서 Claude Code를 시작합니다.
 3. `Day1/CLAUDE.md`의 안전 규칙에 따라 읽기 전용 점검과 dry-run부터 진행합니다.
 4. 실제 배포는 사용자 승인 후에만 진행합니다.
