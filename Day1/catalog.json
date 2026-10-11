@@ -1,0 +1,45 @@
+{
+  "format": "claude-readable-salesforce-install-kit",
+  "apiVersion": "67.0",
+  "purpose": "Claude가 읽고 대상 Developer Edition에 필요한 metadata를 생성·검증·설치하기 위한 비-SFDX 명세 묶음",
+  "installOrder": [
+    {
+      "step": 1,
+      "category": "Object",
+      "path": "Object/"
+    },
+    {
+      "step": 2,
+      "category": "Field",
+      "path": "Field/"
+    },
+    {
+      "step": 3,
+      "category": "Custom App",
+      "path": "Custom App/"
+    },
+    {
+      "step": 4,
+      "category": "Flow",
+      "path": "Flow/"
+    }
+  ],
+  "counts": {
+    "objects": 1,
+    "fields": 13,
+    "apps": 1,
+    "tabs": 1,
+    "flows": 1
+  },
+  "excluded": [
+    "Salesforce DX project scaffold",
+    "manifest/package.xml",
+    "Tableau",
+    "LWC",
+    "Apex",
+    "FlexiPage",
+    "Profiles",
+    "Permission Sets",
+    "sample data"
+  ]
+}

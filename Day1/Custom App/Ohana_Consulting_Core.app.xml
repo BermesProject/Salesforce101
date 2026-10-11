@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0176D3</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <defaultLandingTab>Consulting_Inquiry__c</defaultLandingTab>
+    <description>Ohana Consulting classroom app using standard Salesforce surfaces</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>true</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
+    <label>Ohana Consulting</label>
+    <navType>Standard</navType>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>Consulting_Inquiry__c</tabs>
+    <tabs>standard-Opportunity</tabs>
+    <tabs>standard-Task</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

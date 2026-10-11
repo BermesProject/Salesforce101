@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <decisions>
+        <name>Route_Follow_Up_Action</name>
+        <label>Route Follow-Up Action</label>
+        <locationX>176</locationX>
+        <locationY>180</locationY>
+        <defaultConnectorLabel>No Action</defaultConnectorLabel>
+        <rules>
+            <name>Manager_Escalation</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Is_Manager_Escalation</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue><booleanValue>true</booleanValue></rightValue>
+            </conditions>
+            <connector><targetReference>Get_Inquiry_Owner</targetReference></connector>
+            <label>Manager Escalation</label>
+        </rules>
+        <rules>
+            <name>Self_Reminder</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Is_Self_Reminder</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue><booleanValue>true</booleanValue></rightValue>
+            </conditions>
+            <connector><targetReference>Get_Open_Self_Reminder</targetReference></connector>
+            <label>Self Reminder</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Manager_Available</name>
+        <label>Does the Owner Have a Manager?</label>
+        <locationX>32</locationX>
+        <locationY>400</locationY>
+        <defaultConnectorLabel>No Manager</defaultConnectorLabel>
+        <rules>
+            <name>Manager_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Inquiry_Owner.ManagerId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue><booleanValue>false</booleanValue></rightValue>
+            </conditions>
+            <connector><targetReference>Get_Open_Manager_Escalation</targetReference></connector>
+            <label>Manager Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Open_Manager_Escalation_Exists</name>
+        <label>Is There an Open Manager Escalation?</label>
+        <locationX>32</locationX>
+        <locationY>620</locationY>
+        <defaultConnector><targetReference>Create_Manager_Escalation</targetReference></defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Existing_Manager_Escalation</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Open_Manager_Escalation.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue><booleanValue>false</booleanValue></rightValue>
+            </conditions>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Open_Self_Reminder_Exists</name>
+        <label>Is There an Open Self Reminder?</label>
+        <locationX>320</locationX>
+        <locationY>510</locationY>
+        <defaultConnector><targetReference>Create_Self_Reminder</targetReference></defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Existing_Self_Reminder</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Open_Self_Reminder.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue><booleanValue>false</booleanValue></rightValue>
+            </conditions>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Draft classroom flow for inspecting how an overdue consulting inquiry routes to either a self reminder or a manager escalation while avoiding duplicate open tasks. Students view the structure only; the instructor owns debug and behavior testing.</description>
+    <formulas>
+        <name>Days_Overdue</name>
+        <dataType>Number</dataType>
+        <expression>IF(ISBLANK({!$Record.Next_Contact_Date__c}), 0, TODAY() - {!$Record.Next_Contact_Date__c})</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>Is_Manager_Escalation</name>
+        <dataType>Boolean</dataType>
+        <expression>AND({!$Record.Manager_Attention__c}, TEXT({!$Record.Inquiry_Status__c}) &lt;&gt; "종료", OR(TEXT({!$Record.Priority__c}) = "높음", {!Days_Overdue} &gt;= 3))</expression>
+    </formulas>
+    <formulas>
+        <name>Is_Self_Reminder</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(NOT(ISBLANK({!$Record.Next_Contact_Date__c})), {!$Record.Next_Contact_Date__c} &lt; TODAY(), TEXT({!$Record.Inquiry_Status__c}) &lt;&gt; "종료")</expression>
+    </formulas>
+    <interviewLabel>Consulting Inquiry Escalation Lab {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Consulting Inquiry Escalation Lab</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Manager_Escalation</name>
+        <label>Create Manager Escalation Task</label>
+        <locationX>32</locationX>
+        <locationY>730</locationY>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value><elementReference>$Flow.CurrentDate</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value><stringValue>관리자 지원이 필요하거나 장기간 지연된 컨설팅 문의를 검토합니다.</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value><elementReference>Get_Inquiry_Owner.ManagerId</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value><stringValue>High</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value><stringValue>Not Started</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value><stringValue>[에스컬레이션] 지원 검토</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value><elementReference>$Record.Id</elementReference></value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Self_Reminder</name>
+        <label>Create Self Reminder Task</label>
+        <locationX>320</locationX>
+        <locationY>620</locationY>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value><elementReference>$Flow.CurrentDate</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value><stringValue>기한이 지난 컨설팅 문의에 오늘 후속 연락합니다.</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value><elementReference>$Record.OwnerId</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value><stringValue>Normal</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value><stringValue>Not Started</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value><stringValue>오늘 고객에게 연락</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value><elementReference>$Record.Id</elementReference></value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Inquiry_Owner</name>
+        <label>Get Inquiry Owner</label>
+        <locationX>32</locationX>
+        <locationY>290</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Manager_Available</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>$Record.OwnerId</elementReference></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Open_Manager_Escalation</name>
+        <label>Get Open Manager Escalation</label>
+        <locationX>32</locationX>
+        <locationY>510</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Open_Manager_Escalation_Exists</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>WhatId</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>$Record.Id</elementReference></value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value><stringValue>[에스컬레이션] 지원 검토</stringValue></value>
+        </filters>
+        <filters>
+            <field>IsClosed</field>
+            <operator>EqualTo</operator>
+            <value><booleanValue>false</booleanValue></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Open_Self_Reminder</name>
+        <label>Get Open Self Reminder</label>
+        <locationX>320</locationX>
+        <locationY>400</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Open_Self_Reminder_Exists</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>WhatId</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>$Record.Id</elementReference></value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value><stringValue>오늘 고객에게 연락</stringValue></value>
+        </filters>
+        <filters>
+            <field>IsClosed</field>
+            <operator>EqualTo</operator>
+            <value><booleanValue>false</booleanValue></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>176</locationX>
+        <locationY>50</locationY>
+        <connector><targetReference>Route_Follow_Up_Action</targetReference></connector>
+        <object>Consulting_Inquiry__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

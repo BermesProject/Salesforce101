@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assigned_Consultant__c</fullName>
+    <label>Assigned Consultant</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>석유진</fullName><default>false</default><label>석유진</label></value>
+            <value><fullName>조우찬</fullName><default>false</default><label>조우찬</label></value>
+            <value><fullName>이채원</fullName><default>false</default><label>이채원</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

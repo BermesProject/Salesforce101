@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attention_Reason__c</fullName>
+    <formula>IF(
+ISPICKVAL(Inquiry_Status__c, &quot;종료&quot;),
+&quot;&quot;,
+IF(
+ISBLANK(Next_Contact_Date__c),
+&quot;다음 연락일 누락&quot;,
+IF(
+Next_Contact_Date__c &lt; TODAY(),
+&quot;다음 연락일 경과&quot;,
+IF(
+ISPICKVAL(Priority__c, &quot;높음&quot;),
+&quot;높은 우선순위 문의&quot;,
+&quot;&quot;
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+    <label>Manager-Attention Reason</label>
+    <type>Text</type>
+</CustomField>

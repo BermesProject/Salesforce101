@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Synthetic consulting inquiry used for Salesforce 101 training</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <label>Consulting Inquiry</label>
+    <nameField>
+        <displayFormat>OH-{0000}</displayFormat>
+        <label>Inquiry Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Consulting Inquiries</pluralLabel>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>
