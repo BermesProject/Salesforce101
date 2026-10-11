@@ -1,3 +1,5 @@
+import csv
+from collections import Counter
 import json
 import unittest
 import xml.etree.ElementTree as ET
@@ -6,6 +8,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NS = {"m": "http://soap.sforce.com/2006/04/metadata"}
+
+
+def read_csv(name):
+    with (ROOT / "Data" / name).open(encoding="utf-8", newline="") as stream:
+        return list(csv.DictReader(stream))
+
+
+def required_element(root, path):
+    node = root.find(path, NS)
+    if node is None:
+        raise AssertionError(f"Missing XML element: {path}")
+    return node
 
 
 class ClaudeInstallKitContractTest(unittest.TestCase):
@@ -23,9 +37,11 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
         self.assertEqual(catalog["apiVersion"], "67.0")
         self.assertEqual(
             [item["category"] for item in catalog["installOrder"]],
-            ["Object", "Field", "Custom App", "Flow"],
+            ["Cleanup", "Object", "Field", "Custom App", "Access", "Flow", "Data"],
         )
-        self.assertEqual(catalog["counts"], {"objects": 1, "fields": 13, "apps": 1, "tabs": 1, "flows": 1})
+        self.assertEqual(catalog["installOrder"][0]["mode"], "preview-first")
+        self.assertEqual(catalog["counts"], {"objects": 1, "fields": 13, "apps": 1, "tabs": 1, "permissionSets": 1, "flows": 1})
+        self.assertEqual(catalog["recordCounts"], {"accounts": 8, "contacts": 8, "inquiries": 30, "products": 12, "standardPricebookEntries": 12, "opportunities": 24, "opportunityProducts": 48})
 
     def test_component_folders_and_exact_inventory_exist(self):
         expected = {
@@ -148,7 +164,7 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
         )
 
     def test_prohibited_deployable_categories_are_absent(self):
-        prohibited_suffixes = {".cls", ".js", ".html", ".css", ".permissionset-meta.xml"}
+        prohibited_suffixes = {".cls", ".js", ".html", ".css", ".profile-meta.xml"}
         for path in ROOT.rglob("*"):
             if not path.is_file() or "tests" in path.parts:
                 continue
@@ -156,8 +172,171 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
                 any(path.name.endswith(suffix) for suffix in prohibited_suffixes),
                 path,
             )
-        for name in ["lwc", "classes", "flexipages", "permissionsets", "profiles"]:
+        for name in ["lwc", "classes", "flexipages", "profiles"]:
             self.assertFalse(any(path.name.lower() == name for path in ROOT.rglob("*")))
+
+    def test_system_admin_access_bundle_grants_complete_custom_access(self):
+        path = ROOT / "Access/Salesforce101_Day1_System_Admin_Access.permissionset.xml"
+        permission_set = ET.parse(path).getroot()
+        self.assertEqual(
+            permission_set.findtext("m:label", namespaces=NS),
+            "Salesforce 101 Day 1 System Admin Access",
+        )
+        app = required_element(permission_set, "m:applicationVisibilities")
+        self.assertEqual(app.findtext("m:application", namespaces=NS), "Ohana_Consulting_Core")
+        self.assertEqual(app.findtext("m:visible", namespaces=NS), "true")
+        object_permissions = {
+            node.findtext("m:object", namespaces=NS): node
+            for node in permission_set.findall("m:objectPermissions", NS)
+        }
+        self.assertEqual(
+            set(object_permissions),
+            {"Account", "Contact", "Opportunity", "Product2", "Pricebook2", "Consulting_Inquiry__c"},
+        )
+        for object_name, object_access in object_permissions.items():
+            for key in ["allowCreate", "allowDelete", "allowEdit", "allowRead", "modifyAllRecords", "viewAllRecords"]:
+                self.assertEqual(object_access.findtext(f"m:{key}", namespaces=NS), "true", (object_name, key))
+        permissions = {
+            node.findtext("m:field", namespaces=NS): (
+                node.findtext("m:readable", namespaces=NS),
+                node.findtext("m:editable", namespaces=NS),
+            )
+            for node in permission_set.findall("m:fieldPermissions", NS)
+        }
+        self.assertEqual(
+            set(permissions),
+            {
+                "Consulting_Inquiry__c.Assigned_Consultant__c",
+                "Consulting_Inquiry__c.Attention_Reason__c",
+                "Consulting_Inquiry__c.Core_Problem__c",
+                "Consulting_Inquiry__c.Customer_Account__c",
+                "Consulting_Inquiry__c.Customer_Contact__c",
+                "Consulting_Inquiry__c.Desired_Outcome__c",
+                "Consulting_Inquiry__c.Inquiry_Channel__c",
+                "Consulting_Inquiry__c.Inquiry_Status__c",
+                "Consulting_Inquiry__c.Manager_Attention__c",
+                "Consulting_Inquiry__c.Next_Contact_Date__c",
+                "Consulting_Inquiry__c.Priority__c",
+            },
+        )
+        self.assertNotIn("Consulting_Inquiry__c.Inquiry_Title__c", permissions)
+        self.assertNotIn("Consulting_Inquiry__c.Received_Date__c", permissions)
+        for field, values in permissions.items():
+            self.assertEqual(values[0], "true", field)
+            expected_editable = "false" if field in {
+                "Consulting_Inquiry__c.Attention_Reason__c",
+                "Consulting_Inquiry__c.Manager_Attention__c",
+            } else "true"
+            self.assertEqual(values[1], expected_editable, field)
+        tab = required_element(permission_set, "m:tabSettings")
+        self.assertEqual(tab.findtext("m:tab", namespaces=NS), "Consulting_Inquiry__c")
+        self.assertEqual(tab.findtext("m:visibility", namespaces=NS), "Available")
+
+    def test_complete_practice_dataset_is_portable_and_relational(self):
+        accounts = read_csv("accounts.csv")
+        contacts = read_csv("contacts.csv")
+        inquiries = read_csv("inquiries.csv")
+        products = read_csv("products.csv")
+        opportunities = read_csv("opportunities.csv")
+        lines = read_csv("opportunity-products.csv")
+        self.assertEqual(list(accounts[0]), ["Name", "Industry", "Website", "Description"])
+        self.assertEqual(list(contacts[0]), ["AccountName", "FirstName", "LastName", "Email", "Department"])
+        self.assertEqual(
+            list(inquiries[0]),
+            ["ReferenceKey", "AccountName", "ContactEmail", "Inquiry_Title__c", "Inquiry_Channel__c", "Inquiry_Status__c", "Core_Problem__c", "Desired_Outcome__c", "Priority__c", "Received_Date__c", "Next_Contact_Date__c", "Assigned_Consultant__c"],
+        )
+        self.assertEqual(list(products[0]), ["ProductCode", "Name", "Family", "Description", "IsActive", "StandardPrice", "PricebookEntryIsActive", "UseStandardPrice"])
+        self.assertEqual(list(opportunities[0]), ["OpportunityName", "AccountName", "StageName", "CloseDate", "Description", "NextStep", "Amount"])
+        self.assertEqual(list(lines[0]), ["OpportunityName", "ProductCode", "Quantity", "UnitPrice", "TotalPrice", "Description"])
+        self.assertEqual(
+            (len(accounts), len(contacts), len(inquiries), len(products), len(opportunities), len(lines)),
+            (8, 8, 30, 12, 24, 48),
+        )
+        account_names = {row["Name"] for row in accounts}
+        contact_emails = {row["Email"] for row in contacts}
+        product_codes = {row["ProductCode"] for row in products}
+        opportunity_names = {row["OpportunityName"] for row in opportunities}
+        self.assertEqual(len(account_names), 8)
+        self.assertEqual(len(contact_emails), 8)
+        self.assertEqual(len(product_codes), 12)
+        self.assertEqual(len(opportunity_names), 24)
+        self.assertTrue(all(row["AccountName"] in account_names for row in contacts))
+        account_by_email = {row["Email"]: row["AccountName"] for row in contacts}
+        self.assertEqual(len(account_by_email), 8)
+        self.assertTrue(all(row["AccountName"] in account_names for row in inquiries))
+        self.assertEqual(sum(not row["ContactEmail"] for row in inquiries), 1)
+        self.assertTrue(all(not row["ContactEmail"] or row["ContactEmail"] in contact_emails for row in inquiries))
+        self.assertTrue(all(not row["ContactEmail"] or account_by_email[row["ContactEmail"]] == row["AccountName"] for row in inquiries))
+        self.assertEqual(Counter(row["Assigned_Consultant__c"] for row in inquiries), Counter({"석유진": 10, "조우찬": 10, "이채원": 10}))
+        self.assertTrue(all(row["AccountName"] in account_names for row in opportunities))
+        self.assertEqual(Counter(row["AccountName"] for row in opportunities), Counter({name: 3 for name in account_names}))
+        self.assertTrue(all(row["OpportunityName"] in opportunity_names for row in lines))
+        self.assertTrue(all(row["ProductCode"] in product_codes for row in lines))
+        self.assertEqual(Counter(row["OpportunityName"] for row in lines), Counter({name: 2 for name in opportunity_names}))
+        self.assertEqual(len({(row["OpportunityName"], row["ProductCode"]) for row in lines}), 48)
+        price_by_code = {row["ProductCode"]: int(row["StandardPrice"]) for row in products}
+        amount_by_opportunity = {row["OpportunityName"]: int(row["Amount"]) for row in opportunities}
+        sums = Counter()
+        for row in lines:
+            self.assertEqual(row["Quantity"], "1")
+            self.assertEqual(int(row["UnitPrice"]), price_by_code[row["ProductCode"]])
+            self.assertEqual(int(row["TotalPrice"]), int(row["Quantity"]) * int(row["UnitPrice"]))
+            sums[row["OpportunityName"]] += int(row["TotalPrice"])
+        self.assertEqual(dict(sums), amount_by_opportunity)
+        serialized = " ".join(path.read_text(encoding="utf-8") for path in (ROOT / "Data").glob("*.csv"))
+        self.assertNotRegex(serialized, r"\b(?:001|003|006|00Q|00k)[A-Za-z0-9]{12}(?:[A-Za-z0-9]{3})?\b")
+        self.assertNotIn("OwnerId", serialized)
+
+    def test_data_and_access_runbooks_are_fail_closed(self):
+        data = (ROOT / "Data/README.md").read_text(encoding="utf-8")
+        access = (ROOT / "Access/README.md").read_text(encoding="utf-8")
+        for phrase in ["EMPTY", "COMPLETE", "PARTIAL", "Savepoint", "rollback", "Owner", "설치·실행한 학생", "DML 0", "read-back"]:
+            self.assertIn(phrase, data)
+        for phrase in ["System Administrator", "PermissionSetAssignment", "명시적 승인", "objectPermissions", "fieldPermissions", "applicationVisibilities"]:
+            self.assertIn(phrase, access)
+
+    def test_cleanup_policy_is_preview_first_and_fail_closed(self):
+        policy = (ROOT / "Cleanup/README.md").read_text(encoding="utf-8")
+        required = [
+            "정확한 Account ID",
+            "명시적 승인",
+            "RUN_DELETE = false",
+            "Savepoint",
+            "rollback",
+            "OpportunityLineItem → Task/Event → Case → Opportunity → Contact → Account",
+            "soft delete",
+            "Product2",
+            "PricebookEntry",
+            "Lead",
+            "Campaign",
+            "학생이 만든 레코드",
+            "Customer_Account__c",
+            "Customer_Contact__c",
+            "SetNull",
+            "참조 중이면 중단",
+            "승인 화면에만 일시적으로 표시",
+            "저장소 밖",
+            "즉시 삭제",
+        ]
+        for phrase in required:
+            self.assertIn(phrase, policy)
+        self.assertNotIn("DELETE FROM", policy.upper())
+
+    def test_claude_contract_places_cleanup_before_metadata(self):
+        contract = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+        self.assertLess(contract.index("샘플 데이터 정리"), contract.index("임시 payload 구성"))
+        for phrase in [
+            "Cleanup/README.md",
+            "삭제 후보 preview",
+            "정확한 Account ID",
+            "명시적 승인",
+            "Product2",
+            "PricebookEntry",
+            "hard delete",
+            "승인 화면에만 일시적으로 표시",
+            "`Consulting_Inquiry__c` 참조",
+        ]:
+            self.assertIn(phrase, contract)
 
     def test_claude_contract_requires_preview_approval_and_readback(self):
         contract = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
@@ -165,7 +344,7 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
             "Developer Edition",
             "dry-run",
             "명시적 승인",
-            "Object → Field → Custom App → Flow",
+            "Cleanup → Object → Field → Custom App → Access → Flow → Data",
             "Draft",
             "활성화하지",
             "read-back",

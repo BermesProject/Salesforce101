@@ -1,0 +1,13 @@
+ProductCode,Name,Family,Description,IsActive,StandardPrice,PricebookEntryIsActive,UseStandardPrice
+PKG-AX-ACADEMY-01,AX Academy,AX 교육 패키지,"대상: 여러 직무의 역량을 단계적으로 높이려는 조직. 제공 내용: SVC-AX-BASIC-01 + SVC-AX-ROLE-01 + SVC-AX-PROJ-01 + SVC-AX-ADOPT-01, 선택 SVC-AX-TTT-01. 결과물: 단계별 교육과정, 직무별 과제, 프로젝트 결과물, 성과 리뷰.",true,24000000,true,false
+PKG-AX-SPRINT-01,AX Workflow Sprint,AX 교육 패키지,"대상: 실제 업무 프로세스 하나를 개선하려는 조직. 제공 내용: SVC-AX-DIAG-01 + SVC-AX-WORKFLOW-01 + SVC-AX-PROJ-01 + SVC-AX-ADOPT-01. 결과물: 개선 프로세스, 미니 프로젝트 결과물, 실행 로드맵.",true,21000000,true,false
+PKG-AX-START-01,AX Starter,AX 교육 패키지,"대상: AX 교육을 처음 시작하는 조직. 제공 내용: SVC-AX-DIAG-01 + SVC-AX-LEADER-01 + SVC-AX-BASIC-01. 결과물: 우선 적용 업무 목록, 공통 AX 이해, 후속 교육 제안.",true,8000000,true,false
+PKG-AX-TEAM-01,AX Team Enablement,AX 교육 패키지,"대상: 특정 부서의 실무 활용을 빠르게 시작하려는 조직. 제공 내용: SVC-AX-DIAG-01 + SVC-AX-ROLE-01 + SVC-AX-ADOPT-01. 결과물: 직무별 활용 시나리오, 개인 실행안, 적용 리뷰.",true,11000000,true,false
+SVC-AX-ADOPT-01,AX 현업 적용 리뷰,AX 교육 컨설팅,"대상: AX 교육을 이수하고 현업 적용을 시작한 팀. 제공 내용: 실행 결과, 장애요인, 개선 과제와 후속 학습 방향을 점검합니다. 결과물: 적용 리뷰와 후속 실행안.",true,3000000,true,false
+SVC-AX-BASIC-01,AX 업무 활용 기초교육,AX 교육 컨설팅,"대상: 생성형 AI와 Agent 활용을 시작하는 임직원. 제공 내용: 업무 활용 원리, 질문, 검증, 보안 기본을 교육합니다. 결과물: 공통 AX 이해와 개인 실천 체크리스트.",true,4000000,true,false
+SVC-AX-DIAG-01,AX 현황 진단 워크숍,AX 교육 컨설팅,"대상: AX 교육을 시작하거나 방향을 재정비하는 조직. 제공 내용: 업무 문제, AI 활용 수준, 우선 적용 업무를 진단합니다. 결과물: 우선 적용 업무 목록과 후속 교육 제안.",true,3000000,true,false
+SVC-AX-LEADER-01,AX 리더 브리핑,AX 교육 컨설팅,"대상: 경영진과 팀장. 제공 내용: AX 개념, 추진 원칙, 교육 방향을 정렬합니다. 결과물: 리더 공통 원칙과 교육 추진 방향.",true,2000000,true,false
+SVC-AX-PROJ-01,AX 미니 프로젝트 코칭,AX 교육 컨설팅,대상: 실제 업무 과제를 실행하려는 팀. 제공 내용: 과제 선정부터 프로토타입 또는 개선안 완성까지 코칭합니다. 결과물: 미니 프로젝트 결과물과 실행 로드맵.,true,12000000,true,false
+SVC-AX-ROLE-01,직무별 AX 실무교육,AX 교육 컨설팅,"대상: 영업, 마케팅, 서비스, 운영 직무팀. 제공 내용: 직무별 업무 시나리오 중심 실습을 진행합니다. 결과물: 직무별 활용 시나리오와 개인 실행안.",true,6000000,true,false
+SVC-AX-TTT-01,AX 사내강사 양성,AX 교육 컨설팅,"대상: 내부 확산을 담당할 강사와 챔피언. 제공 내용: 교육 진행, 실습 운영, 피드백 역량을 강화합니다. 결과물: 사내강사 운영안과 교육 실행 자료.",true,9000000,true,false
+SVC-AX-WORKFLOW-01,AI 업무 프로세스 재설계 워크숍,AX 교육 컨설팅,대상: 실제 업무 흐름을 개선하려는 팀. 제공 내용: 현행 프로세스를 분석하고 AI 적용 단계와 사람의 판단 지점을 설계합니다. 결과물: 개선 프로세스와 실행 우선순위.,true,7000000,true,false

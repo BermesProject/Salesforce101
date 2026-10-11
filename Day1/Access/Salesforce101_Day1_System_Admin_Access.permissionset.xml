@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Ohana_Consulting_Core</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <description>Complete DAY 1 metadata and record access for the installing System Administrator.</description>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Assigned_Consultant__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>false</editable><field>Consulting_Inquiry__c.Attention_Reason__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Core_Problem__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Customer_Account__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Customer_Contact__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Desired_Outcome__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Inquiry_Channel__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Inquiry_Status__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>false</editable><field>Consulting_Inquiry__c.Manager_Attention__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Next_Contact_Date__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Consulting_Inquiry__c.Priority__c</field><readable>true</readable></fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Salesforce 101 Day 1 System Admin Access</label>
+    <objectPermissions><allowCreate>true</allowCreate><allowDelete>true</allowDelete><allowEdit>true</allowEdit><allowRead>true</allowRead><modifyAllRecords>true</modifyAllRecords><object>Account</object><viewAllRecords>true</viewAllRecords></objectPermissions>
+    <objectPermissions><allowCreate>true</allowCreate><allowDelete>true</allowDelete><allowEdit>true</allowEdit><allowRead>true</allowRead><modifyAllRecords>true</modifyAllRecords><object>Contact</object><viewAllRecords>true</viewAllRecords></objectPermissions>
+    <objectPermissions><allowCreate>true</allowCreate><allowDelete>true</allowDelete><allowEdit>true</allowEdit><allowRead>true</allowRead><modifyAllRecords>true</modifyAllRecords><object>Opportunity</object><viewAllRecords>true</viewAllRecords></objectPermissions>
+    <objectPermissions><allowCreate>true</allowCreate><allowDelete>true</allowDelete><allowEdit>true</allowEdit><allowRead>true</allowRead><modifyAllRecords>true</modifyAllRecords><object>Product2</object><viewAllRecords>true</viewAllRecords></objectPermissions>
+    <objectPermissions><allowCreate>true</allowCreate><allowDelete>true</allowDelete><allowEdit>true</allowEdit><allowRead>true</allowRead><modifyAllRecords>true</modifyAllRecords><object>Pricebook2</object><viewAllRecords>true</viewAllRecords></objectPermissions>
+    <objectPermissions><allowCreate>true</allowCreate><allowDelete>true</allowDelete><allowEdit>true</allowEdit><allowRead>true</allowRead><modifyAllRecords>true</modifyAllRecords><object>Consulting_Inquiry__c</object><viewAllRecords>true</viewAllRecords></objectPermissions>
+    <tabSettings>
+        <tab>Consulting_Inquiry__c</tab>
+        <visibility>Available</visibility>
+    </tabSettings>
+</PermissionSet>
