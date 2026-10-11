@@ -1,6 +1,6 @@
 # Salesforce101
 
-Claude와 함께 Salesforce Developer Edition에 DAY 1 실습 metadata를 설치하기 위한 교육 저장소입니다.
+Claude와 함께 Salesforce Developer Edition에 DAY 1 실습환경 셋업을 위한 레포지토리입니다.
 
 ## 시작하기
 
