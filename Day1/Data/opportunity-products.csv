@@ -1,0 +1,49 @@
+OpportunityName,ProductCode,Quantity,UnitPrice,TotalPrice,Description
+[데모 영업] OP-01 | 가온교육 AX 현황 진단,SVC-AX-DIAG-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-DIAG-01
+[데모 영업] OP-01 | 가온교육 AX 현황 진단,SVC-AX-LEADER-01,1,2000000,2000000,합성 AX 교육 서비스 라인: SVC-AX-LEADER-01
+[데모 영업] OP-02 | 가온교육 리더·기초 교육,SVC-AX-BASIC-01,1,4000000,4000000,합성 AX 교육 서비스 라인: SVC-AX-BASIC-01
+[데모 영업] OP-02 | 가온교육 리더·기초 교육,SVC-AX-LEADER-01,1,2000000,2000000,합성 AX 교육 서비스 라인: SVC-AX-LEADER-01
+[데모 영업] OP-03 | 가온교육 직무별 실무교육,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-03 | 가온교육 직무별 실무교육,SVC-AX-ROLE-01,1,6000000,6000000,합성 AX 교육 서비스 라인: SVC-AX-ROLE-01
+[데모 영업] OP-04 | 두리케어 AX Starter 도입,PKG-AX-START-01,1,8000000,8000000,합성 AX 교육 서비스 라인: PKG-AX-START-01
+[데모 영업] OP-04 | 두리케어 AX Starter 도입,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-05 | 두리케어 영업 AX 실무교육,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-05 | 두리케어 영업 AX 실무교육,SVC-AX-ROLE-01,1,6000000,6000000,합성 AX 교육 서비스 라인: SVC-AX-ROLE-01
+[데모 영업] OP-06 | 두리케어 업무 프로세스 재설계,SVC-AX-PROJ-01,1,12000000,12000000,합성 AX 교육 서비스 라인: SVC-AX-PROJ-01
+[데모 영업] OP-06 | 두리케어 업무 프로세스 재설계,SVC-AX-WORKFLOW-01,1,7000000,7000000,합성 AX 교육 서비스 라인: SVC-AX-WORKFLOW-01
+[데모 영업] OP-07 | 마루오피스 AX Team Enablement,PKG-AX-TEAM-01,1,11000000,11000000,합성 AX 교육 서비스 라인: PKG-AX-TEAM-01
+[데모 영업] OP-07 | 마루오피스 AX Team Enablement,SVC-AX-LEADER-01,1,2000000,2000000,합성 AX 교육 서비스 라인: SVC-AX-LEADER-01
+[데모 영업] OP-08 | 마루오피스 현업 적용 강화,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-08 | 마루오피스 현업 적용 강화,SVC-AX-ROLE-01,1,6000000,6000000,합성 AX 교육 서비스 라인: SVC-AX-ROLE-01
+[데모 영업] OP-09 | 마루오피스 사내강사 양성,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-09 | 마루오피스 사내강사 양성,SVC-AX-TTT-01,1,9000000,9000000,합성 AX 교육 서비스 라인: SVC-AX-TTT-01
+[데모 영업] OP-10 | 모아리빙 AX Workflow Sprint,PKG-AX-SPRINT-01,1,21000000,21000000,합성 AX 교육 서비스 라인: PKG-AX-SPRINT-01
+[데모 영업] OP-10 | 모아리빙 AX Workflow Sprint,SVC-AX-TTT-01,1,9000000,9000000,합성 AX 교육 서비스 라인: SVC-AX-TTT-01
+[데모 영업] OP-11 | 모아리빙 운영 업무 재설계,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-11 | 모아리빙 운영 업무 재설계,SVC-AX-WORKFLOW-01,1,7000000,7000000,합성 AX 교육 서비스 라인: SVC-AX-WORKFLOW-01
+[데모 영업] OP-12 | 모아리빙 AX 미니 프로젝트,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-12 | 모아리빙 AX 미니 프로젝트,SVC-AX-PROJ-01,1,12000000,12000000,합성 AX 교육 서비스 라인: SVC-AX-PROJ-01
+[데모 영업] OP-13 | 별하테크 AX Academy,PKG-AX-ACADEMY-01,1,24000000,24000000,합성 AX 교육 서비스 라인: PKG-AX-ACADEMY-01
+[데모 영업] OP-13 | 별하테크 AX Academy,SVC-AX-TTT-01,1,9000000,9000000,합성 AX 교육 서비스 라인: SVC-AX-TTT-01
+[데모 영업] OP-14 | 별하테크 영업 생산성 교육,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-14 | 별하테크 영업 생산성 교육,SVC-AX-ROLE-01,1,6000000,6000000,합성 AX 교육 서비스 라인: SVC-AX-ROLE-01
+[데모 영업] OP-15 | 별하테크 현업 적용 리뷰,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-15 | 별하테크 현업 적용 리뷰,SVC-AX-LEADER-01,1,2000000,2000000,합성 AX 교육 서비스 라인: SVC-AX-LEADER-01
+[데모 영업] OP-16 | 새싹푸드 AX 리더 브리핑,SVC-AX-BASIC-01,1,4000000,4000000,합성 AX 교육 서비스 라인: SVC-AX-BASIC-01
+[데모 영업] OP-16 | 새싹푸드 AX 리더 브리핑,SVC-AX-LEADER-01,1,2000000,2000000,합성 AX 교육 서비스 라인: SVC-AX-LEADER-01
+[데모 영업] OP-17 | 새싹푸드 AX Starter 확산,PKG-AX-START-01,1,8000000,8000000,합성 AX 교육 서비스 라인: PKG-AX-START-01
+[데모 영업] OP-17 | 새싹푸드 AX Starter 확산,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-18 | 새싹푸드 사내강사 양성,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-18 | 새싹푸드 사내강사 양성,SVC-AX-TTT-01,1,9000000,9000000,합성 AX 교육 서비스 라인: SVC-AX-TTT-01
+[데모 영업] OP-19 | 온새미로호텔 AX Academy 확산,PKG-AX-ACADEMY-01,1,24000000,24000000,합성 AX 교육 서비스 라인: PKG-AX-ACADEMY-01
+[데모 영업] OP-19 | 온새미로호텔 AX Academy 확산,SVC-AX-TTT-01,1,9000000,9000000,합성 AX 교육 서비스 라인: SVC-AX-TTT-01
+[데모 영업] OP-20 | 온새미로호텔 직무별 실무교육,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-20 | 온새미로호텔 직무별 실무교육,SVC-AX-ROLE-01,1,6000000,6000000,합성 AX 교육 서비스 라인: SVC-AX-ROLE-01
+[데모 영업] OP-21 | 온새미로호텔 교육 성과 리뷰,SVC-AX-ADOPT-01,1,3000000,3000000,합성 AX 교육 서비스 라인: SVC-AX-ADOPT-01
+[데모 영업] OP-21 | 온새미로호텔 교육 성과 리뷰,SVC-AX-LEADER-01,1,2000000,2000000,합성 AX 교육 서비스 라인: SVC-AX-LEADER-01
+[데모 영업] OP-22 | 한결물류 AX Team Enablement 검토,PKG-AX-TEAM-01,1,11000000,11000000,합성 AX 교육 서비스 라인: PKG-AX-TEAM-01
+[데모 영업] OP-22 | 한결물류 AX Team Enablement 검토,SVC-AX-LEADER-01,1,2000000,2000000,합성 AX 교육 서비스 라인: SVC-AX-LEADER-01
+[데모 영업] OP-23 | 한결물류 Workflow Sprint 검토,PKG-AX-SPRINT-01,1,21000000,21000000,합성 AX 교육 서비스 라인: PKG-AX-SPRINT-01
+[데모 영업] OP-23 | 한결물류 Workflow Sprint 검토,SVC-AX-TTT-01,1,9000000,9000000,합성 AX 교육 서비스 라인: SVC-AX-TTT-01
+[데모 영업] OP-24 | 한결물류 AX Academy 재검토,PKG-AX-ACADEMY-01,1,24000000,24000000,합성 AX 교육 서비스 라인: PKG-AX-ACADEMY-01
+[데모 영업] OP-24 | 한결물류 AX Academy 재검토,SVC-AX-TTT-01,1,9000000,9000000,합성 AX 교육 서비스 라인: SVC-AX-TTT-01

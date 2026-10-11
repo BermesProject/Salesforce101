@@ -1,27 +1,44 @@
 {
   "format": "claude-readable-salesforce-install-kit",
   "apiVersion": "67.0",
-  "purpose": "Claude가 읽고 대상 Developer Edition에 필요한 metadata를 생성·검증·설치하기 위한 비-SFDX 명세 묶음",
+  "purpose": "Claude가 읽고 대상 Developer Edition을 정리한 뒤 metadata, 관리자 접근 권한, 최종 실습 데이터를 설치·검증하기 위한 비-SFDX 명세 묶음",
   "installOrder": [
     {
       "step": 1,
+      "category": "Cleanup",
+      "path": "Cleanup/",
+      "mode": "preview-first"
+    },
+    {
+      "step": 2,
       "category": "Object",
       "path": "Object/"
     },
     {
-      "step": 2,
+      "step": 3,
       "category": "Field",
       "path": "Field/"
     },
     {
-      "step": 3,
+      "step": 4,
       "category": "Custom App",
       "path": "Custom App/"
     },
     {
-      "step": 4,
+      "step": 5,
+      "category": "Access",
+      "path": "Access/"
+    },
+    {
+      "step": 6,
       "category": "Flow",
       "path": "Flow/"
+    },
+    {
+      "step": 7,
+      "category": "Data",
+      "path": "Data/",
+      "mode": "preview-first"
     }
   ],
   "counts": {
@@ -29,17 +46,26 @@
     "fields": 13,
     "apps": 1,
     "tabs": 1,
+    "permissionSets": 1,
     "flows": 1
+  },
+  "recordCounts": {
+    "accounts": 8,
+    "contacts": 8,
+    "inquiries": 30,
+    "products": 12,
+    "standardPricebookEntries": 12,
+    "opportunities": 24,
+    "opportunityProducts": 48
   },
   "excluded": [
     "Salesforce DX project scaffold",
     "manifest/package.xml",
     "Tableau",
     "LWC",
-    "Apex",
+    "Apex classes",
     "FlexiPage",
     "Profiles",
-    "Permission Sets",
-    "sample data"
+    "historical comparison data"
   ]
 }
