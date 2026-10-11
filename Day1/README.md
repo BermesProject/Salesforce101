@@ -8,7 +8,8 @@
 - `Object/` — `Consulting_Inquiry__c` 오브젝트 정의
 - `Field/` — 커스텀 필드 13개
 - `Custom App/` — `Ohana Consulting` Lightning 앱과 커스텀 탭
-- `Access/` — System Administrator 전체 접근 Permission Set
+- `List View/` — Consulting Inquiry 주요 필드 리스트뷰와 표준 오브젝트 기존 All 리스트뷰 표시 열
+- `Access/` — System Administrator 전체 접근, View All Fields, 탭 Available Permission Set
 - `Flow/` — 구조 관찰용 Draft Flow 1개
 - `Data/` — Account, Contact, Inquiry, Product, Price Book, Opportunity, Opportunity Product 데이터
 - `catalog.json` — 실행 순서와 정확한 구성요소·레코드 수량

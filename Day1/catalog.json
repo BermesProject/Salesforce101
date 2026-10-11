@@ -26,16 +26,21 @@
     },
     {
       "step": 5,
+      "category": "List View",
+      "path": "List View/"
+    },
+    {
+      "step": 6,
       "category": "Access",
       "path": "Access/"
     },
     {
-      "step": 6,
+      "step": 7,
       "category": "Flow",
       "path": "Flow/"
     },
     {
-      "step": 7,
+      "step": 8,
       "category": "Data",
       "path": "Data/",
       "mode": "preview-first"
@@ -46,6 +51,7 @@
     "fields": 13,
     "apps": 1,
     "tabs": 1,
+    "listViews": 5,
     "permissionSets": 1,
     "flows": 1
   },

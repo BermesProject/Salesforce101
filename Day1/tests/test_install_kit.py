@@ -37,10 +37,10 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
         self.assertEqual(catalog["apiVersion"], "67.0")
         self.assertEqual(
             [item["category"] for item in catalog["installOrder"]],
-            ["Cleanup", "Object", "Field", "Custom App", "Access", "Flow", "Data"],
+            ["Cleanup", "Object", "Field", "Custom App", "List View", "Access", "Flow", "Data"],
         )
         self.assertEqual(catalog["installOrder"][0]["mode"], "preview-first")
-        self.assertEqual(catalog["counts"], {"objects": 1, "fields": 13, "apps": 1, "tabs": 1, "permissionSets": 1, "flows": 1})
+        self.assertEqual(catalog["counts"], {"objects": 1, "fields": 13, "apps": 1, "tabs": 1, "listViews": 5, "permissionSets": 1, "flows": 1})
         self.assertEqual(catalog["recordCounts"], {"accounts": 8, "contacts": 8, "inquiries": 30, "products": 12, "standardPricebookEntries": 12, "opportunities": 24, "opportunityProducts": 48})
 
     def test_component_folders_and_exact_inventory_exist(self):
@@ -51,6 +51,13 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
                 "Consulting_Inquiry__c.tab.xml",
             },
             "Flow": {"Consulting_Inquiry_Escalation_Lab.flow.xml"},
+            "List View": {
+                "Account.AllAccounts.listView.xml",
+                "Contact.AllContacts.listView.xml",
+                "Opportunity.AllOpportunities.listView.xml",
+                "Product2.AllProducts.listView.xml",
+                "Consulting_Inquiry__c.All_Consulting_Inquiries.listView.xml",
+            },
         }
         for folder, names in expected.items():
             actual = {p.name for p in (ROOT / folder).glob("*.xml")}
@@ -97,6 +104,42 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
         )
         tab = ET.parse(ROOT / "Custom App/Consulting_Inquiry__c.tab.xml").getroot()
         self.assertEqual(tab.findtext("m:customObject", namespaces=NS), "true")
+
+    def test_list_views_show_key_fields_and_only_adjust_standard_all_views(self):
+        expected = {
+            "Account.AllAccounts.listView.xml": (
+                "AllAccounts",
+                "All Accounts",
+                ["ACCOUNT.NAME", "ACCOUNT.INDUSTRY", "ACCOUNT.URL", "CORE.USERS.ALIAS"],
+            ),
+            "Contact.AllContacts.listView.xml": (
+                "AllContacts",
+                "All Contacts",
+                ["FULL_NAME", "ACCOUNT.NAME", "CONTACT.DEPARTMENT", "CONTACT.EMAIL", "CORE.USERS.ALIAS"],
+            ),
+            "Opportunity.AllOpportunities.listView.xml": (
+                "AllOpportunities",
+                "All Opportunities",
+                ["OPPORTUNITY.NAME", "ACCOUNT.NAME", "OPPORTUNITY.STAGE_NAME", "OPPORTUNITY.AMOUNT", "OPPORTUNITY.CLOSE_DATE", "OPPORTUNITY.NEXT_STEP", "CORE.USERS.ALIAS"],
+            ),
+            "Product2.AllProducts.listView.xml": (
+                "AllProducts",
+                "All Products",
+                ["PRODUCT2.NAME", "PRODUCT2.CUSTOMER_PRODUCT_ID", "PRODUCT2.FAMILY", "PRODUCT2.ACTIVE"],
+            ),
+            "Consulting_Inquiry__c.All_Consulting_Inquiries.listView.xml": (
+                "All_Consulting_Inquiries",
+                "All Consulting Inquiries",
+                ["NAME", "Inquiry_Title__c", "Customer_Account__c", "Customer_Contact__c", "Inquiry_Status__c", "Priority__c", "Assigned_Consultant__c", "Next_Contact_Date__c", "Manager_Attention__c"],
+            ),
+        }
+        for name, (full_name, label, columns) in expected.items():
+            root = ET.parse(ROOT / "List View" / name).getroot()
+            self.assertEqual(root.findtext("m:fullName", namespaces=NS), full_name)
+            self.assertEqual(root.findtext("m:label", namespaces=NS), label)
+            self.assertEqual(root.findtext("m:filterScope", namespaces=NS), "Everything")
+            self.assertEqual([node.text for node in root.findall("m:columns", NS)], columns)
+            self.assertEqual(root.findall("m:filters", NS), [], name)
 
     def test_flow_is_the_single_draft_inspection_flow(self):
         flow_path = ROOT / "Flow/Consulting_Inquiry_Escalation_Lab.flow.xml"
@@ -194,7 +237,7 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
             {"Account", "Contact", "Opportunity", "Product2", "Pricebook2", "Consulting_Inquiry__c"},
         )
         for object_name, object_access in object_permissions.items():
-            for key in ["allowCreate", "allowDelete", "allowEdit", "allowRead", "modifyAllRecords", "viewAllRecords"]:
+            for key in ["allowCreate", "allowDelete", "allowEdit", "allowRead", "modifyAllRecords", "viewAllFields", "viewAllRecords"]:
                 self.assertEqual(object_access.findtext(f"m:{key}", namespaces=NS), "true", (object_name, key))
         permissions = {
             node.findtext("m:field", namespaces=NS): (
@@ -290,10 +333,13 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
     def test_data_and_access_runbooks_are_fail_closed(self):
         data = (ROOT / "Data/README.md").read_text(encoding="utf-8")
         access = (ROOT / "Access/README.md").read_text(encoding="utf-8")
+        list_views = (ROOT / "List View/README.md").read_text(encoding="utf-8")
         for phrase in ["EMPTY", "COMPLETE", "PARTIAL", "Savepoint", "rollback", "Owner", "설치·실행한 학생", "DML 0", "read-back"]:
             self.assertIn(phrase, data)
-        for phrase in ["System Administrator", "PermissionSetAssignment", "명시적 승인", "objectPermissions", "fieldPermissions", "applicationVisibilities"]:
+        for phrase in ["System Administrator", "PermissionSetAssignment", "명시적 승인", "objectPermissions", "fieldPermissions", "applicationVisibilities", "View All Fields", "Available"]:
             self.assertIn(phrase, access)
+        for phrase in ["AllAccounts", "AllContacts", "AllOpportunities", "AllProducts", "All_Consulting_Inquiries", "표시 열만", "filterScope", "label", "filters"]:
+            self.assertIn(phrase, list_views)
 
     def test_cleanup_policy_is_preview_first_and_fail_closed(self):
         policy = (ROOT / "Cleanup/README.md").read_text(encoding="utf-8")
@@ -344,7 +390,7 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
             "Developer Edition",
             "dry-run",
             "명시적 승인",
-            "Cleanup → Object → Field → Custom App → Access → Flow → Data",
+            "Cleanup → Object → Field → Custom App → List View → Access → Flow → Data",
             "Draft",
             "활성화하지",
             "read-back",
