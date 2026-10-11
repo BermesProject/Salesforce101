@@ -7,7 +7,7 @@
 - `Ohana_Consulting_Core`의 `applicationVisibilities = true`
 - `Consulting_Inquiry__c` 탭 Available
 - Account, Contact, Opportunity, Product2, Pricebook2, Consulting_Inquiry__c의 Create / Read / Edit / Delete
-- 위 6개 오브젝트의 View All Records / Modify All Records
+- 위 6개 오브젝트의 View All Records / Modify All Records / View All Fields
 - Consulting Inquiry 필드 11개의 명시적 `fieldPermissions`
 - Formula 필드 `Attention_Reason__c`, `Manager_Attention__c`는 readable=true, editable=false
 - 필수 필드 `Inquiry_Title__c`, `Received_Date__c`는 Salesforce가 암시적으로 접근을 부여하므로 Permission Set XML에 넣지 않습니다. required custom field의 fieldPermissions를 추가하면 배포가 거부될 수 있습니다.
@@ -28,7 +28,7 @@
 - 현재 설치 사용자가 `System Administrator`
 - 현재 설치 사용자에 대한 PermissionSetAssignment 정확히 1건
 - 앱과 Consulting Inquiry 탭 접근 가능
-- 6개 오브젝트의 CRED, View All Records, Modify All Records가 모두 true
+- 6개 오브젝트의 CRED, View All Records, Modify All Records, View All Fields가 모두 true
 - 11개 명시 필드 접근과 2개 required-field 암시 접근 확인
 - Formula 필드는 읽기 전용
 

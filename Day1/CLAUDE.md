@@ -9,14 +9,15 @@
 - Object 1개: `Consulting_Inquiry__c`
 - Field 13개: `Field/`의 전체 XML
 - Custom App 1개: `Ohana_Consulting_Core`
-- Custom Tab 1개: `Consulting_Inquiry__c`
-- System Admin Access Permission Set 1개
+- Custom Tab 1개: `Consulting_Inquiry__c` — Permission Set에서 `Available`
+- List View 5개: Consulting Inquiry 주요 필드 1개 + 표준 오브젝트 기존 All 리스트뷰 표시 열 4개
+- System Admin Access Permission Set 1개 — 6개 오브젝트에 `View All Fields`
 - Flow 1개: `Consulting_Inquiry_Escalation_Lab` — 반드시 `Draft`
 - Account 8 / Contact 8 / Consulting Inquiry 30
 - Product2 12 / Standard PricebookEntry 12
 - Opportunity 24 / OpportunityLineItem 48
 
-실행 순서는 **Cleanup → Object → Field → Custom App → Access → Flow → Data**입니다. 각 쓰기 단계는 preview 또는 dry-run, 사용자 승인, 적용, read-back을 별도로 수행합니다.
+실행 순서는 **Cleanup → Object → Field → Custom App → List View → Access → Flow → Data**입니다. 각 쓰기 단계는 preview 또는 dry-run, 사용자 승인, 적용, read-back을 별도로 수행합니다.
 
 ## 절대 규칙
 
@@ -41,13 +42,14 @@
 ## 파일 해석
 
 - `Cleanup/` — 기존 Developer Edition 샘플 데이터의 승인 기반 정리 계약
-- `Object/`, `Field/`, `Custom App/`, `Access/`, `Flow/` — metadata 입력 명세
+- `Object/`, `Field/`, `Custom App/`, `List View/`, `Access/`, `Flow/` — metadata 입력 명세
 - `Data/` — Record ID가 없는 최종 실습 데이터와 관계 계약
 - XML 파일명의 `.object.xml`, `.field.xml`, `.app.xml`, `.tab.xml`, `.permissionset.xml`, `.flow.xml`은 사람이 구분하기 위한 이름입니다.
 - 임시 DX 작업공간으로 옮길 때 Salesforce source-format 파일명으로 바꾸되 API Name과 XML 본문은 임의로 바꾸지 않습니다.
 - `Object/Consulting_Inquiry__c.object.xml`에는 FlexiPage action override가 없습니다. 추가하지 마세요.
-- `Custom App/Consulting_Inquiry__c.tab.xml`은 앱 navigation의 선행 구성요소입니다.
-- `Access/Salesforce101_Day1_System_Admin_Access.permissionset.xml`은 System Admin의 앱·오브젝트·필드·레코드 접근을 명시적으로 보강합니다.
+- `Custom App/Consulting_Inquiry__c.tab.xml`은 앱 navigation의 선행 구성요소이며 Access Permission Set의 `tabSettings`에서 `Available`이어야 합니다.
+- `List View/`의 표준 오브젝트 파일은 기존 All 리스트뷰의 표시 열만 변경합니다. 배포 전 `filterScope`, `label`, `filters`가 예상 상태인지 retrieve하고 다르면 중단합니다.
+- `Access/Salesforce101_Day1_System_Admin_Access.permissionset.xml`은 System Admin의 앱·오브젝트·필드·레코드 접근과 6개 오브젝트의 `View All Fields`를 명시적으로 보강합니다.
 
 ## 실행 단계
 
@@ -66,18 +68,19 @@
 
 ### 3. 임시 payload 구성
 
-저장소 밖 임시 디렉터리에 최소 Salesforce DX 프로젝트를 생성하고 Object, Field, Custom App, Access, Flow XML만 source-format 경로에 배치합니다. 이 임시 프로젝트는 전송 수단일 뿐 학생 배포 산출물이 아닙니다.
+저장소 밖 임시 디렉터리에 최소 Salesforce DX 프로젝트를 생성하고 Object, Field, Custom App, List View, Access, Flow XML만 source-format 경로에 배치합니다. 이 임시 프로젝트는 전송 수단일 뿐 학생 배포 산출물이 아닙니다.
 
 ### 4. metadata dry-run
 
 - 대상 alias를 명시해 전체 payload를 dry-run
 - component success/error 수와 Apex test 실행 수를 구분해서 보고
 - Flow가 Draft인지 payload에서도 재확인
-- Access Permission Set에 6개 오브젝트 전체 권한, 앱 visibility, 탭, 11개 명시 field permission이 있는지 확인
+- Access Permission Set에 6개 오브젝트의 CRED, View All Records, Modify All Records, View All Fields, 앱 visibility, `Consulting_Inquiry__c` 탭 `Available`, 11개 명시 field permission이 있는지 확인
+- List View 5개의 표시 열과 표준 All 리스트뷰의 label, filterScope, filters 보존을 확인
 
 ### 5. 승인 후 metadata 배포
 
-사용자가 승인한 경우에만 dry-run과 동일한 payload를 배포합니다. 배포 직후 object, field 13개, app, tab, Permission Set, Flow를 Metadata 또는 Tooling API로 read-back합니다.
+사용자가 승인한 경우에만 dry-run과 동일한 payload를 배포합니다. 배포 직후 object, field 13개, app, tab, List View 5개, Permission Set, Flow를 Metadata 또는 Tooling API로 read-back합니다.
 
 ### 6. System Admin 접근 할당
 
@@ -96,7 +99,9 @@ Metadata:
 - `Consulting_Inquiry__c`가 Deployed이며 Reports와 Activities 활성화
 - custom field 13개의 type, formula, picklist, Lookup 계약 일치
 - 앱 label `Ohana Consulting`, navigation Account / Contact / Consulting Inquiry / Opportunity / Task
-- Permission Set의 앱, 탭, 6개 objectPermissions, 11개 명시 fieldPermissions 일치
+- `Consulting_Inquiry__c` 탭 `Available`
+- Consulting Inquiry 주요 필드 리스트뷰 1개와 표준 All 리스트뷰 4개의 표시 열 일치
+- Permission Set의 앱, 탭, 6개 objectPermissions(CRED / View All Records / Modify All Records / View All Fields), 11개 명시 fieldPermissions 일치
 - 현재 System Administrator의 PermissionSetAssignment 1건
 - FlowDefinition `ActiveVersionId = null`, `LatestVersionId`는 최신 Draft 버전
 
