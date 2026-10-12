@@ -4,7 +4,7 @@
 
 ## 목표
 
-학생이 지정한 별도 Salesforce **Developer Edition**을 정리하고 다음 구성을 설치합니다.
+교육생이 지정한 별도 Salesforce **Developer Edition**을 정리하고 다음 구성을 설치합니다.
 
 - Object 1개: `Consulting_Inquiry__c`
 - Field 13개: `Field/`의 전체 XML
@@ -34,8 +34,8 @@
 11. 승인 직후 각 쓰기 전에 alias와 Organization 정보를 다시 조회하여 같은 Developer Edition인지 검증합니다.
 12. `Access/README.md`에 따라 현재 설치 사용자가 정확히 `System Administrator`인지 확인하고, 명시적 승인 후 해당 사용자에게만 Permission Set을 할당합니다. Profile은 수정하지 않습니다.
 13. `Data/README.md`에 따라 데이터 전체를 `EMPTY`, `COMPLETE`, `PARTIAL`로 분류합니다. `PARTIAL`, duplicate business key, 예상 밖 prefix가 있으면 DML 전에 중단합니다.
-14. 데이터 생성 시 User를 만들거나 `OwnerId`를 지정·변경하지 않습니다. Account, Contact, Inquiry, Opportunity의 Owner는 설치·실행한 학생 사용자입니다.
-15. Flow는 `Draft`로 유지하고 활성화하지 않습니다. 학생은 구조만 관찰하며 Debug는 강사 범위입니다.
+14. 데이터 생성 시 User를 만들거나 `OwnerId`를 지정·변경하지 않습니다. Account, Contact, Inquiry, Opportunity의 Owner는 설치·실행한 교육생 사용자입니다.
+15. Flow는 `Draft`로 유지하고 활성화하지 않습니다. 교육생은 구조만 관찰하며 Debug는 강사 범위입니다.
 16. Tableau, LWC, Apex Class, FlexiPage, Profile, 과거 비교 데이터는 만들거나 변경하지 않습니다.
 17. 실패나 부분 성공이 발생하면 완료라고 보고하지 말고 적용·미적용 상태를 구분해 보고합니다.
 
@@ -68,7 +68,7 @@
 
 ### 3. 임시 payload 구성
 
-저장소 밖 임시 디렉터리에 최소 Salesforce DX 프로젝트를 생성하고 Object, Field, Custom App, List View, Access, Flow XML만 source-format 경로에 배치합니다. 이 임시 프로젝트는 전송 수단일 뿐 학생 배포 산출물이 아닙니다.
+저장소 밖 임시 디렉터리에 최소 Salesforce DX 프로젝트를 생성하고 Object, Field, Custom App, List View, Access, Flow XML만 source-format 경로에 배치합니다. 이 임시 프로젝트는 전송 수단일 뿐 교육생 배포 산출물이 아닙니다.
 
 ### 4. metadata dry-run
 
@@ -113,7 +113,7 @@ Data:
 - Product2 12 / Standard PricebookEntry 12
 - Opportunity 24 / OpportunityLineItem 48
 - Opportunity별 상품 2개, Quantity 1, line sum과 Amount 일치
-- 학생 소유 대상 레코드의 Owner가 설치·실행한 학생 사용자
+- 교육생 소유 대상 레코드의 Owner가 설치·실행한 교육생 사용자
 - 완료 상태 재실행은 `COMPLETE`, DML 0
 
 ## 첫 응답 형식

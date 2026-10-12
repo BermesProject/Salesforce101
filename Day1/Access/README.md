@@ -32,4 +32,4 @@
 - 11개 명시 필드 접근과 2개 required-field 암시 접근 확인
 - Formula 필드는 읽기 전용
 
-Permission Set은 레코드 `Owner`를 바꾸지 않습니다. Data seed에서 생성되는 Account, Contact, Inquiry, Opportunity는 설치·실행한 학생 사용자가 Owner가 됩니다.
+Permission Set은 레코드 `Owner`를 바꾸지 않습니다. Data seed에서 생성되는 Account, Contact, Inquiry, Opportunity는 설치·실행한 교육생 사용자가 Owner가 됩니다.

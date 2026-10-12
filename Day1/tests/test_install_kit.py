@@ -334,7 +334,7 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
         data = (ROOT / "Data/README.md").read_text(encoding="utf-8")
         access = (ROOT / "Access/README.md").read_text(encoding="utf-8")
         list_views = (ROOT / "List View/README.md").read_text(encoding="utf-8")
-        for phrase in ["EMPTY", "COMPLETE", "PARTIAL", "Savepoint", "rollback", "Owner", "설치·실행한 학생", "DML 0", "read-back"]:
+        for phrase in ["EMPTY", "COMPLETE", "PARTIAL", "Savepoint", "rollback", "Owner", "설치·실행한 교육생", "DML 0", "read-back"]:
             self.assertIn(phrase, data)
         for phrase in ["System Administrator", "PermissionSetAssignment", "명시적 승인", "objectPermissions", "fieldPermissions", "applicationVisibilities", "View All Fields", "Available"]:
             self.assertIn(phrase, access)
@@ -355,7 +355,7 @@ class ClaudeInstallKitContractTest(unittest.TestCase):
             "PricebookEntry",
             "Lead",
             "Campaign",
-            "학생이 만든 레코드",
+            "교육생이 만든 레코드",
             "Customer_Account__c",
             "Customer_Contact__c",
             "SetNull",

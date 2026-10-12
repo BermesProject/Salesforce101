@@ -1,6 +1,6 @@
 # Salesforce 101 — Claude Install Kit
 
-이 디렉터리는 **Salesforce DX 프로젝트가 아닙니다.** Claude가 읽어 학생의 Developer Edition을 안전하게 정리하고 metadata, 관리자 접근 권한, 최종 실습 데이터를 설치하는 명세 키트입니다.
+이 디렉터리는 **Salesforce DX 프로젝트가 아닙니다.** Claude가 읽어 교육생의 Developer Edition을 안전하게 정리하고 metadata, 관리자 접근 권한, 최종 실습 데이터를 설치하는 명세 키트입니다.
 
 ## 구성
 
@@ -23,12 +23,12 @@
 - Product2 12 / Standard PricebookEntry 12
 - Opportunity 24 / OpportunityLineItem 48
 
-Account, Contact, Inquiry, Opportunity의 Owner는 설치·실행한 학생 사용자이며 역할별 User를 만들거나 OwnerId를 강제로 설정하지 않습니다.
+Account, Contact, Inquiry, Opportunity의 Owner는 설치·실행한 교육생 사용자이며 역할별 User를 만들거나 OwnerId를 강제로 설정하지 않습니다.
 
-## 학생이 Claude에 입력할 문장
+## 교육생께서 Claude에 입력하실 문장
 
 ```text
-이 폴더의 CLAUDE.md와 catalog.json을 먼저 읽고 내 Salesforce Developer Edition을 구성해 줘. 기존 샘플 데이터 정리 preview, metadata dry-run, System Admin 접근 확인, 실습 데이터 상태 preview까지만 먼저 진행해. Cleanup, metadata 배포, Permission Set 할당, 데이터 생성은 각각 실행 전에 내 승인을 받아.
+이 폴더의 CLAUDE.md와 catalog.json을 먼저 읽고 제 Salesforce Developer Edition을 구성해 주세요. 기존 샘플 데이터 정리 preview, metadata dry-run, System Admin 접근 확인, 실습 데이터 상태 preview까지만 먼저 진행해 주세요. Cleanup, metadata 배포, Permission Set 할당, 데이터 생성은 각각 실행 전에 제 승인을 받아 주세요.
 ```
 
 ## 포함하지 않는 것

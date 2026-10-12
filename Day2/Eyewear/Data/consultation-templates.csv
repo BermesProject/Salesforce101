@@ -1,0 +1,11 @@
+Source_Consultation_Key__c,Customer_Alias__c,Customer_Tier__c,Preferred_Category__c,Preference_Note__c,Request_Detail__c,Consultation_Status__c,Received_Offset_Hours,Due_Offset_Hours,First_Response_Offset_Hours,Advisor_Code,Manager_Employee_Code,Needs_Manager__c,Assistance_Reason__c,Current_Handler_Code,Escalation_Status__c,Escalation_Reason__c,Escalated_At__c
+GM-ESC-A,나이젤,플래티넘,선글라스,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,착용감과 재고를 확인하고 첫 안내를 부탁드립니다.,진행,0,4,,EMP-LUX-001,EMP-LUX-002,false,,,미요청,,
+GM-ESC-B,나이젤,플래티넘,선글라스,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,행사 참석 전 다른 매장의 재고를 확보할 수 있는지 확인 부탁드립니다.,진행,0,4,,EMP-LUX-001,EMP-LUX-002,true,타 매장 재고 조정,,미요청,,
+GM-ESC-C,나이젤,플래티넘,선글라스,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,착용감과 재고를 확인하고 첫 안내를 부탁드립니다.,진행,-5,-1,,EMP-LUX-001,EMP-LUX-002,false,,,미요청,,
+GM-BASE-01,리나,일반,안경,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,착용감과 재고를 확인하고 첫 안내를 부탁드립니다.,접수,-2,46,,EMP-LUX-001,EMP-LUX-002,false,,,미요청,,
+GM-BASE-02,도윤,프리미엄,선글라스,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,착용감과 재고를 확인하고 첫 안내를 부탁드립니다.,진행,-2,22,,EMP-LUX-001,EMP-LUX-002,false,,,미요청,,
+GM-BASE-03,서아,플래티넘,선글라스,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,착용감과 재고를 확인하고 첫 안내를 부탁드립니다.,진행,-6,-2,-3,EMP-LUX-001,EMP-LUX-002,false,,,미요청,,
+GM-BASE-04,지후,일반,수리,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,착용감과 재고를 확인하고 첫 안내를 부탁드립니다.,완료,-50,-2,-3,EMP-LUX-001,EMP-LUX-002,false,,,미요청,,
+GM-BASE-05,민서,프리미엄,피팅,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,행사 참석 전 다른 매장의 재고를 확보할 수 있는지 확인 부탁드립니다.,진행,-1,23,,EMP-LUX-001,EMP-LUX-002,true,피팅 후 불편에 대한 예외 교환 검토,,미요청,,
+GM-BASE-06,하준,프리미엄,선글라스,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,착용감과 재고를 확인하고 첫 안내를 부탁드립니다.,진행,-25,-1,-0.5,EMP-LUX-001,EMP-LUX-002,false,,,미요청,,
+GM-BASE-07,수빈,일반,선글라스,얼굴형에 편안하게 맞고 로고가 과하지 않은 프레임을 선호합니다.,착용감과 재고를 확인하고 첫 안내를 부탁드립니다.,진행,-3,45,-2,EMP-LUX-001,EMP-LUX-002,false,,,미요청,,

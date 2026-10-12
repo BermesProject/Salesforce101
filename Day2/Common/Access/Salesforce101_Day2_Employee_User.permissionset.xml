@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+  <description>Day 2 공통 직원 명부 접근 권한입니다.</description>
+  <fieldPermissions><editable>true</editable><field>Employee__c.Employee_Number__c</field><readable>true</readable></fieldPermissions>
+  <fieldPermissions><editable>true</editable><field>Employee__c.Industry__c</field><readable>true</readable></fieldPermissions>
+  <fieldPermissions><editable>true</editable><field>Employee__c.Department__c</field><readable>true</readable></fieldPermissions>
+  <fieldPermissions><editable>true</editable><field>Employee__c.Role__c</field><readable>true</readable></fieldPermissions>
+  <fieldPermissions><editable>true</editable><field>Employee__c.Active__c</field><readable>true</readable></fieldPermissions>
+  <fieldPermissions><editable>true</editable><field>Employee__c.Manager_Employee__c</field><readable>true</readable></fieldPermissions>
+  <hasActivationRequired>false</hasActivationRequired>
+  <label>Salesforce101 Day2 직원 명부</label>
+  <objectPermissions><allowCreate>true</allowCreate><allowDelete>false</allowDelete><allowEdit>true</allowEdit><allowRead>true</allowRead><modifyAllRecords>false</modifyAllRecords><object>Employee__c</object><viewAllRecords>false</viewAllRecords></objectPermissions>
+  <tabSettings><tab>Employee__c</tab><visibility>Available</visibility></tabSettings>
+</PermissionSet>

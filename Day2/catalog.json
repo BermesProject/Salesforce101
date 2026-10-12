@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "courseDate": "2026-10-13",
+  "apiVersion": "67.0",
+  "installOrder": [
+    "Common",
+    "선택한 주제의 metadata",
+    "선택한 주제의 data"
+  ],
+  "cleanup": false,
+  "topics": {
+    "Common": {
+      "schema": "Common/schema.json",
+      "object": "Employee__c"
+    },
+    "Game": {
+      "schema": "Game/schema.json",
+      "object": "Game_Marketing_Performance__c"
+    },
+    "Eyewear": {
+      "schema": "Eyewear/schema.json",
+      "object": "Luxury_Client_Consultation__c"
+    },
+    "AI-Sales": {
+      "schema": "AI-Sales/schema.json",
+      "object": "B2B_AI_Project__c"
+    }
+  },
+  "counts": {
+    "employees": 6,
+    "campaigns": 2,
+    "gamePerformance": 120,
+    "eyewearConsultations": 10,
+    "aiProjects": 4
+  },
+  "practiceOnly": {
+    "gameScreenEntries": 2,
+    "eyewearReservedKeys": [
+      "GM-ESC-D",
+      "GM-ESC-E"
+    ]
+  },
+  "dataContract": "DATA_PLAN.md"
+}

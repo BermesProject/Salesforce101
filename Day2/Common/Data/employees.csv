@@ -1,0 +1,7 @@
+Employee_Number__c,Name,Industry__c,Department__c,Role__c,Active__c,Manager_Employee_Code
+EMP-GAME-001,최산,게임,마케팅,마케팅 담당,true,
+EMP-LUX-001,앤디,럭셔리,고객 상담,상담 직원,true,EMP-LUX-002
+EMP-LUX-002,미란다,럭셔리,매장 운영,상위 매니저,true,
+EMP-AI-001,페퍼,AI 제조업,영업,영업 담당,true,
+EMP-AI-002,토니,AI 제조업,기술 영업,기술 담당,true,
+EMP-AI-003,브루스,AI 제조업,프로젝트 운영,프로젝트 코디네이터,true,
