@@ -1,0 +1,161 @@
+{
+  "object": "Game_Marketing_Performance__c",
+  "label": "게임 마케팅 실적",
+  "nameField": {
+    "type": "AutoNumber",
+    "label": "실적 번호",
+    "displayFormat": "GMP-{0000}"
+  },
+  "fields": [
+    {
+      "api": "Report_Date__c",
+      "label": "실적 기준일",
+      "type": "Date"
+    },
+    {
+      "api": "Campaign__c",
+      "label": "캠페인",
+      "type": "Lookup",
+      "referenceTo": "Campaign"
+    },
+    {
+      "api": "Channel__c",
+      "label": "채널",
+      "type": "Picklist",
+      "values": [
+        {
+          "value": "Video",
+          "label": "영상"
+        },
+        {
+          "value": "Community",
+          "label": "커뮤니티"
+        },
+        {
+          "value": "SNS",
+          "label": "SNS"
+        },
+        {
+          "value": "Offline",
+          "label": "오프라인행사"
+        }
+      ]
+    },
+    {
+      "api": "Assigned_Employee__c",
+      "label": "담당 직원",
+      "type": "Lookup",
+      "referenceTo": "Employee__c"
+    },
+    {
+      "api": "Target_Installs__c",
+      "label": "목표 설치 수",
+      "type": "Number",
+      "precision": 18,
+      "scale": 0
+    },
+    {
+      "api": "Actual_Installs__c",
+      "label": "실제 설치 수",
+      "type": "Number",
+      "precision": 18,
+      "scale": 0
+    },
+    {
+      "api": "Clicks__c",
+      "label": "클릭 수",
+      "type": "Number",
+      "precision": 18,
+      "scale": 0
+    },
+    {
+      "api": "First_Match_Users__c",
+      "label": "첫 경기 완료 인원",
+      "type": "Number",
+      "precision": 18,
+      "scale": 0
+    },
+    {
+      "api": "Purchase_Users__c",
+      "label": "구매 인원",
+      "type": "Number",
+      "precision": 18,
+      "scale": 0
+    },
+    {
+      "api": "Purchase_Revenue__c",
+      "label": "구매 매출",
+      "type": "Currency",
+      "precision": 18,
+      "scale": 2
+    },
+    {
+      "api": "Review_Status__c",
+      "label": "검토 상태",
+      "type": "Picklist",
+      "values": [
+        {
+          "value": "Draft",
+          "label": "작성중"
+        },
+        {
+          "value": "Submitted",
+          "label": "제출"
+        }
+      ],
+      "default": "Draft"
+    },
+    {
+      "api": "Performance_Key__c",
+      "label": "원본 식별키",
+      "type": "Text",
+      "length": 100,
+      "unique": true,
+      "externalId": true
+    },
+    {
+      "api": "Target_Achievement__c",
+      "label": "목표 달성률",
+      "type": "Percent",
+      "precision": 18,
+      "scale": 0,
+      "formula": "IF(OR(ISBLANK(Target_Installs__c),Target_Installs__c<=0,ISBLANK(Actual_Installs__c)),NULL,Actual_Installs__c/Target_Installs__c)",
+      "formulaTreatBlanksAs": "BlankAsBlank",
+      "readOnly": true
+    },
+    {
+      "api": "First_Match_Rate__c",
+      "label": "첫 경기 전환율",
+      "type": "Percent",
+      "precision": 18,
+      "scale": 0,
+      "formula": "IF(OR(ISBLANK(Actual_Installs__c),Actual_Installs__c<=0,ISBLANK(First_Match_Users__c)),NULL,First_Match_Users__c/Actual_Installs__c)",
+      "formulaTreatBlanksAs": "BlankAsBlank",
+      "readOnly": true
+    }
+  ],
+  "app": "Game_Marketing_Operations",
+  "appLabel": "게임 마케팅 운영",
+  "permissionSet": "Game_Marketing_Operations_User",
+  "tabs": [
+    "Employee__c",
+    "standard-Campaign",
+    "Game_Marketing_Performance__c"
+  ],
+  "standardExtensions": {
+    "Campaign": [
+      {
+        "api": "Training_Campaign_Code__c",
+        "label": "원본 식별키",
+        "type": "Text",
+        "length": 40,
+        "unique": true,
+        "externalId": true
+      }
+    ]
+  },
+  "apiVersion": "67.0",
+  "enableReports": true,
+  "sharingModel": "ReadWrite",
+  "deploymentStatus": "Deployed"
+}

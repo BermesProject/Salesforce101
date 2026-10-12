@@ -1,0 +1,57 @@
+{
+  "object": "Employee__c",
+  "label": "직원",
+  "nameField": {
+    "type": "Text",
+    "label": "직원명"
+  },
+  "fields": [
+    {
+      "api": "Employee_Number__c",
+      "label": "직원 코드",
+      "type": "Text",
+      "length": 40,
+      "unique": true,
+      "externalId": true
+    },
+    {
+      "api": "Industry__c",
+      "label": "주제",
+      "type": "Picklist",
+      "values": [
+        "게임",
+        "럭셔리",
+        "AI 제조업"
+      ]
+    },
+    {
+      "api": "Department__c",
+      "label": "부서",
+      "type": "Text",
+      "length": 80
+    },
+    {
+      "api": "Role__c",
+      "label": "업무 역할",
+      "type": "Text",
+      "length": 80
+    },
+    {
+      "api": "Active__c",
+      "label": "활성 직원",
+      "type": "Checkbox",
+      "default": true
+    },
+    {
+      "api": "Manager_Employee__c",
+      "label": "상위 직원",
+      "type": "Lookup",
+      "referenceTo": "Employee__c"
+    }
+  ],
+  "permissionSet": "Salesforce101_Day2_Employee_User",
+  "apiVersion": "67.0",
+  "enableReports": true,
+  "sharingModel": "ReadWrite",
+  "deploymentStatus": "Deployed"
+}

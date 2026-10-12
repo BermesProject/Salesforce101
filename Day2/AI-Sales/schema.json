@@ -1,0 +1,189 @@
+{
+  "object": "B2B_AI_Project__c",
+  "label": "AI 도입 프로젝트",
+  "nameField": {
+    "type": "AutoNumber",
+    "label": "프로젝트 번호",
+    "displayFormat": "BAP-{0000}"
+  },
+  "fields": [
+    {
+      "api": "Source_Project_Key__c",
+      "label": "원본 식별키",
+      "type": "Text",
+      "length": 80,
+      "unique": true,
+      "externalId": true
+    },
+    {
+      "api": "Client_Company__c",
+      "label": "고객사",
+      "type": "Text",
+      "length": 80
+    },
+    {
+      "api": "Use_Case__c",
+      "label": "사용 목적",
+      "type": "Text",
+      "length": 255
+    },
+    {
+      "api": "Sales_Stage__c",
+      "label": "영업 단계",
+      "type": "Picklist",
+      "values": [
+        "탐색",
+        "PoC 제안",
+        "PoC 진행",
+        "상용 협의",
+        "수주",
+        "보류"
+      ]
+    },
+    {
+      "api": "Model_Name__c",
+      "label": "평가 모델",
+      "type": "Text",
+      "length": 120
+    },
+    {
+      "api": "Request_Notes__c",
+      "label": "고객 요청 원문",
+      "type": "LongTextArea",
+      "length": 32768,
+      "visibleLines": 5
+    },
+    {
+      "api": "POC_Success_Criteria__c",
+      "label": "PoC 성공 기준",
+      "type": "LongTextArea",
+      "length": 32768,
+      "visibleLines": 5
+    },
+    {
+      "api": "POC_Target_Date__c",
+      "label": "PoC 목표일",
+      "type": "Date"
+    },
+    {
+      "api": "Review_Date__c",
+      "label": "검토 회의일",
+      "type": "Date"
+    },
+    {
+      "api": "Evaluation_Environment__c",
+      "label": "평가 환경",
+      "type": "Picklist",
+      "values": [
+        "전용 서버",
+        "클라우드",
+        "미확인"
+      ]
+    },
+    {
+      "api": "Data_Readiness__c",
+      "label": "데이터 준비",
+      "type": "Picklist",
+      "values": [
+        "준비 완료",
+        "준비 중",
+        "미확인"
+      ]
+    },
+    {
+      "api": "Security_Review_Status__c",
+      "label": "보안 검토",
+      "type": "Picklist",
+      "values": [
+        "통과",
+        "검토 중",
+        "미확인"
+      ]
+    },
+    {
+      "api": "Hardware_Access__c",
+      "label": "장비 접근",
+      "type": "Picklist",
+      "values": [
+        "확정",
+        "조율 중",
+        "미확인"
+      ]
+    },
+    {
+      "api": "Decision_Maker_Confirmed__c",
+      "label": "의사결정자 확인",
+      "type": "Checkbox",
+      "default": false
+    },
+    {
+      "api": "Sales_Employee__c",
+      "label": "영업 담당",
+      "type": "Lookup",
+      "referenceTo": "Employee__c"
+    },
+    {
+      "api": "Technical_Employee__c",
+      "label": "기술 담당",
+      "type": "Lookup",
+      "referenceTo": "Employee__c"
+    },
+    {
+      "api": "Project_Coordinator__c",
+      "label": "프로젝트 코디네이터",
+      "type": "Lookup",
+      "referenceTo": "Employee__c"
+    },
+    {
+      "api": "AI_Summary__c",
+      "label": "AI 요약",
+      "type": "LongTextArea",
+      "length": 32768,
+      "visibleLines": 5
+    },
+    {
+      "api": "Email_Draft__c",
+      "label": "이메일 초안",
+      "type": "LongTextArea",
+      "length": 32768,
+      "visibleLines": 5
+    },
+    {
+      "api": "AI_Review_Status__c",
+      "label": "AI 검토 상태",
+      "type": "Picklist",
+      "values": [
+        "미검토",
+        "수정 필요",
+        "검토 완료"
+      ],
+      "default": "미검토"
+    },
+    {
+      "api": "Email_Status__c",
+      "label": "이메일 상태",
+      "type": "Picklist",
+      "values": [
+        "미발송",
+        "테스트 발송 완료"
+      ],
+      "default": "미발송"
+    },
+    {
+      "api": "Sent_At__c",
+      "label": "발송 시각",
+      "type": "DateTime"
+    }
+  ],
+  "app": "B2B_AI_Sales_Operations",
+  "appLabel": "AI 영업 운영",
+  "permissionSet": "B2B_AI_Project_User",
+  "tabs": [
+    "Employee__c",
+    "B2B_AI_Project__c"
+  ],
+  "apiVersion": "67.0",
+  "enableReports": true,
+  "sharingModel": "ReadWrite",
+  "deploymentStatus": "Deployed"
+}

@@ -1,0 +1,3 @@
+Training_Campaign_Code__c,Name,IsActive,StartDate,EndDate,Description
+KA3-NEW,신규 감독 모집,true,2026-09-21,2026-10-13,교육용 가상 게임 킥오프 아레나 3의 신규 설치 캠페인입니다.
+KA3-RETURN,복귀 감독 초대,true,2026-09-21,2026-10-13,교육용 가상 게임의 복귀 설치 캠페인입니다.

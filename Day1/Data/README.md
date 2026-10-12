@@ -23,7 +23,7 @@
 
 ## Owner 계약
 
-CSV에는 `OwnerId`가 없습니다. Account, Contact, Consulting Inquiry, Opportunity는 설치·실행한 학생 사용자가 Owner가 됩니다. 역할별 Salesforce User를 만들거나 Owner를 재배정하지 않습니다. Permission Set은 접근 권한만 부여하며 소유권을 바꾸지 않습니다.
+CSV에는 `OwnerId`가 없습니다. Account, Contact, Consulting Inquiry, Opportunity는 설치·실행한 교육생 사용자가 Owner가 됩니다. 역할별 Salesforce User를 만들거나 Owner를 재배정하지 않습니다. Permission Set은 접근 권한만 부여하며 소유권을 바꾸지 않습니다.
 
 ## 설치 순서
 
@@ -73,6 +73,6 @@ Preview는 항상 DML 0이어야 합니다. `EMPTY`일 때만 정확한 생성 �
 - Opportunity 24건의 Account, StageName, CloseDate, Description, NextStep 일치
 - OpportunityLineItem 48건의 ProductCode, Quantity, UnitPrice, TotalPrice, Description 일치
 - Opportunity별 product pair 2개와 Amount 합계 일치
-- 학생이 소유해야 하는 생성 레코드의 Owner가 설치·실행한 학생 사용자
+- 교육생이 소유해야 하는 생성 레코드의 Owner가 설치·실행한 교육생 사용자
 
 실제 쓰기는 metadata 배포와 System Administrator Permission Set 할당이 성공한 뒤 별도 승인을 받아 진행합니다.
